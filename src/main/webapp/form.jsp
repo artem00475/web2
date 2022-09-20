@@ -66,7 +66,7 @@
         }
         #canv{
             width: 400px;
-            height: 400px;
+            height: 300px;
             border: 1px solid black;
             background-color: white;
         }
@@ -95,7 +95,7 @@
     <tr class="inputRow">
         <!-- График -->
         <td>
-            <canvas id="canv" width="400px" height="400px"></canvas>
+            <canvas id="canv" width="400px" height="300px"></canvas>
         </td>
         <script type="text/javascript">
             <%@include file="/scripts/draw.js"%>

@@ -92,32 +92,16 @@ function send(x,y) {
         send.send(null);
         setTimeout(function(){
             location.reload();
-            // let table = document.getElementById("table1");
-            // let tr = document.createElement("tr");
-            // tr.innerHTML='<td>'+x+'</td><td>'+y+'</td><td>'+radius+'</td><td></td>'
-            // table.appendChild(tr);
         }, 500);
     }
 
 }
 
-// function reestablish(r) {
-//     alert("good");
-//     const p = document.getElementsByClassName('param');
-//     for (let i = 0; i < p.length; i++) {
-//         if(p[i].value == r) {
-//             p[i].checked = true;
-//             break;
-//         }
-//     }
-//     drawGraph(r);
-// }
-
 function getCursorPosition(canvas,event) {
     if (ifRadiusChosen) {
         let pos = canvas.getBoundingClientRect();
-        let x = ((event.clientX - pos.left -200)/50).toFixed(2);
-        let y = ((200 - (event.clientY - pos.top))/50).toFixed(2);
+        let x = ((event.clientX - pos.left -250)/50).toFixed(2);
+        let y = ((150 - (event.clientY - pos.top))/50).toFixed(2);
         send(x,y);
     }
     else {
