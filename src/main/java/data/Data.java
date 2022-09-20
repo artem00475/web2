@@ -1,10 +1,10 @@
 package data;
 
-public class Data {
-    private float x;
-    private float y;
-    private float r;
-    private boolean hit;
+public final class Data {
+    private final float x;
+    private final  float y;
+    private final float r;
+    private final boolean hit;
 
     public Data(float x, float y, float r, boolean hit) {
         this.x=x;

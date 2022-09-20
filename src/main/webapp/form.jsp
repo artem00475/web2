@@ -100,6 +100,9 @@
         <script type="text/javascript">
             <%@include file="/scripts/draw.js"%>
         </script>
+        <script type="text/javascript">
+            <%@include file="/scripts/checker.js"%>
+        </script>
         <!-- Форма -->
         <td><form action="" method="get" onsubmit="return checkForm(this)">
             <!-- Поле ввода координаты Х -->
@@ -170,29 +173,27 @@
                     <th>R</th>
                     <th>Hit</th>
                 </tr>
-                <% try {
-                    DataConteiner dataConteiner = (DataConteiner) request.getServletContext().getAttribute("table");
-                if (dataConteiner.getSize()>0) {
-                    Data data = dataConteiner.getData(dataConteiner.getSize()-1);
-                %>
-                <script>setCords(<%=data.getX()%>,<%=data.getY()%>,<%=data.getHit()%>)</script>
-                <script>drawGraph(<%=data.getR()%>)</script>
-                <script>drawDot()</script>
-                <%for (int i=0;i<dataConteiner.getSize();i++) { %>
-                    <tr>
-                        <td><%=dataConteiner.getData(i).getX()%></td>
-                        <td><%=dataConteiner.getData(i).getY()%></td>
-                        <td><%=dataConteiner.getData(i).getR()%></td>
-                        <td><%=dataConteiner.getData(i).getHit()%></td>
-                    </tr>
-                <%
-                    }%>
-                <%}else {%>
-                <script>draw();</script>
-                <%}
-                    }catch (NullPointerException e) {%>
-                <script>draw();</script>
-                    <%}%>
+<%--                <% try {--%>
+<%--                    DataConteiner dataConteiner = (DataConteiner) request.getServletContext().getAttribute("table");--%>
+<%--                if (dataConteiner.getSize()>0) {%>--%>
+                <script>draw()</script>
+                <script>getData()</script>
+<%--                <%for (int i=0;i<dataConteiner.getSize();i++) { %>--%>
+<%--                <script>drawDot(<%=dataConteiner.getData(i).getX()%>,<%=dataConteiner.getData(i).getY()%>,<%=dataConteiner.getData(i).getHit()%>)</script>--%>
+<%--                    <tr>--%>
+<%--                        <td><%=dataConteiner.getData(i).getX()%></td>--%>
+<%--                        <td><%=dataConteiner.getData(i).getY()%></td>--%>
+<%--                        <td><%=dataConteiner.getData(i).getR()%></td>--%>
+<%--                        <td><%=dataConteiner.getData(i).getHit()%></td>--%>
+<%--                    </tr>--%>
+<%--                <%--%>
+<%--                    }%>--%>
+<%--                <%}else {%>--%>
+<%--                <script>draw();</script>--%>
+<%--                <%}--%>
+<%--                    }catch (NullPointerException e) {%>--%>
+<%--                <script>draw();</script>--%>
+<%--                    <%}%>--%>
             </table>
         </td>
     </tr>
@@ -202,9 +203,6 @@
     </tr>
 </table>
 <!-- Подключение скрипта проверки формы -->
-<script type="text/javascript">
-    <%@include file="/scripts/checker.js"%>
-</script>
 <script>addEventListenerToCanvas();</script>
 
 <%--<script>--%>

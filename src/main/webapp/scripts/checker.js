@@ -1,5 +1,6 @@
 let ifRadiusChosen=false;
 let radius;
+let array = new Array();
 function checkForm(el) {
     let y = el.y.value;
     let x = el.x.value;
@@ -90,12 +91,69 @@ function send(x,y) {
         let send = new XMLHttpRequest();
         send.open("GET", "/lab2-1.0-SNAPSHOT/?x=" + x + "&y=" + y + "&r=" + radius);
         send.send(null);
-        setTimeout(function(){
-            location.reload();
-        }, 500);
-    }
 
+        send.onreadystatechange = function () {
+            if (send.readyState !=4) {
+                return;
+            }
+            if (send.status == 200){
+                let datas = send.responseText.matchAll(/<td>-?[0-9a-z].*<\/td>/g);
+                let array1 = new Array();
+                for (const data of datas) {
+                    array1.push(data[0].replace('<td>','').replace('</td>',''));
+                }
+                let tr = document.createElement("tr");
+                tr.innerHTML='<td>'+array1[0]+'</td> <td>'+array1[1]+' </td> <td>'+array1[2]+'</td> <td>'+array1[3]+'</td>';
+                document.getElementById("table1").appendChild(tr);
+                let hit=false;
+                if (array1[3]=="true") {
+                    hit=true;
+                }
+                let obj = {
+                    x:array1[0],
+                    y:array1[1],
+                    r:array1[2],
+                    hit:hit
+                };
+                array.push(obj);
+                drawDot(obj.x,obj.y,hit);
+            }
+        }
+    }
 }
+
+function getData() {
+    let request = new XMLHttpRequest();
+    request.open("GET","/lab2-1.0-SNAPSHOT/data");
+    request.send();
+    request.onreadystatechange = function () {
+        if (request.readyState !=4) {
+            return;
+        }
+        if (request.status == 200) {
+            if (!request.responseText.match("empty")) {
+            let dates = request.responseText.split("\n");
+            dates.pop();
+            dates.forEach(data => {
+                console.log(JSON.parse(data));
+                array.push(JSON.parse(data));
+            });
+            fillTableAndDots();
+        }
+        }
+    }
+}
+function fillTableAndDots() {
+    if (array.length>0) {
+        array.forEach(data => {
+            let tr = document.createElement("tr");
+            tr.innerHTML='<td>'+data.x+'</td> <td>'+data.y+' </td> <td>'+data.r+'</td> <td>'+data.hit+'</td>';
+            document.getElementById("table1").appendChild(tr);
+            drawDot(data.x,data.y,data.hit);
+        })
+    }
+}
+
 
 function getCursorPosition(canvas,event) {
     if (ifRadiusChosen) {

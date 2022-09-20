@@ -29,7 +29,7 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String[]> params = req.getParameterMap();
-        try {
+        if (params.get("x")!=null & params.get("y")!=null & params.get("r")!=null) {
             if (validateX(params.get("x")[0]) & validateY(params.get("y")[0]) & validateR(params.get("r")[0])) {
                 boolean hit = false;
                 if (firstQaurter() || thirdQaurter() || forthQuarter()) hit = true;
@@ -105,7 +105,7 @@ public class AreaCheckServlet extends HttpServlet {
                 out.println("<th>R</th>");
                 out.println("<th>Hit</th>");
                 out.println("</tr>");
-                out.println("<tr>");
+                out.println("<tr id='data'>");
                 out.println("<td>" + params.get("x")[0] + "</td>");
                 out.println("<td>" + params.get("y")[0] + "</td>");
                 out.println("<td>" + params.get("r")[0] + "</td>");
@@ -115,7 +115,7 @@ public class AreaCheckServlet extends HttpServlet {
                 out.println("</td></tr></table>");
                 out.println("</body></html>");
             } else response.sendRedirect("/lab2-1.0-SNAPSHOT/");
-        }catch (NullPointerException e) {
+        }else {
             response.sendRedirect("/lab2-1.0-SNAPSHOT/");
         }
     }

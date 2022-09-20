@@ -3,6 +3,8 @@ let ctx=canvas.getContext('2d');
 let x=-1;
 let y=-1;
 let hit;
+
+
 function draw() {
     for (let x = 50; x <= 350; x += 50) {
         ctx.moveTo(x, 0);
@@ -17,22 +19,25 @@ function draw() {
     ctx.stroke();
 }
 
-function drawDot() {
+function drawDot(x,y,hitC) {
+    x=x*50+250;
+    y=150 - y*50;
     if (x >= 0 & y >= 0) {
         ctx.beginPath();
-        ctx.fillStyle = hit;
+        if (hitC) ctx.fillStyle = "green";
+        else ctx.fillStyle="red";
         ctx.moveTo(x, y);
         ctx.arc(x, y, 3, 0, Math.PI * 2);
         ctx.fill();
     }
 }
 
-function setCords(xCord,yCord,hitC) {
-    x=xCord*50+250;
-    y=150 - yCord*50;
-    if (hitC) hit="green";
-    else hit="red";
-}
+// function setCords(xCord,yCord,hitC) {
+//     x=xCord*50+250;
+//     y=150 - yCord*50;
+//     if (hitC) hit="green";
+//     else hit="red";
+// }
 
 function clearCanv() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -60,5 +65,7 @@ function drawGraph(r) {
 
     draw();
     ctx.beginPath();
+
+    array.forEach(data => drawDot(data.x,data.y,data.hit));
 
 }
