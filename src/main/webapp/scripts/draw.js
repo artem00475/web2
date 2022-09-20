@@ -15,12 +15,15 @@ function draw() {
 
     ctx.strokeStyle = "#333";
     ctx.stroke();
+}
+
+function drawDot() {
     if (x >= 0 & y >= 0) {
-    ctx.beginPath();
-    ctx.fillStyle = hit;
-    ctx.moveTo(x, y);
-    ctx.arc(x, y, 3, 0, Math.PI * 2);
-    ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = hit;
+        ctx.moveTo(x, y);
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.fill();
     }
 }
 
@@ -38,7 +41,7 @@ function clearCanv() {
 function drawGraph(r) {
     clearCanv();
     ctx.fillStyle = 'rgb(35, 184, 253)';
-
+    ctx.beginPath();
     //rectangle
     ctx.rect(200, 200, r * 50, r * 50);
     ctx.fill();

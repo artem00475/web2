@@ -176,6 +176,8 @@
                     Data data = dataConteiner.getData(dataConteiner.getSize()-1);
                 %>
                 <script>setCords(<%=data.getX()%>,<%=data.getY()%>,<%=data.getHit()%>)</script>
+                <script>drawGraph(<%=data.getR()%>)</script>
+                <script>drawDot()</script>
                 <%for (int i=0;i<dataConteiner.getSize();i++) { %>
                     <tr>
                         <td><%=dataConteiner.getData(i).getX()%></td>
@@ -184,12 +186,13 @@
                         <td><%=dataConteiner.getData(i).getHit()%></td>
                     </tr>
                 <%
-                    }
-                }
-                    }catch (NullPointerException e) {
-
-                    }
-                %>
+                    }%>
+                <%}else {%>
+                <script>draw();</script>
+                <%}
+                    }catch (NullPointerException e) {%>
+                <script>draw();</script>
+                    <%}%>
             </table>
         </td>
     </tr>
@@ -204,8 +207,9 @@
 </script>
 <script>addEventListenerToCanvas();</script>
 
-<script>
-    draw();
-</script>
+<%--<script>--%>
+<%--    draw();--%>
+<%--    drawDot();--%>
+<%--</script>--%>
 </body>
 </html>
