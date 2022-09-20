@@ -97,6 +97,9 @@
         <td>
             <canvas id="canv" width="400px" height="400px"></canvas>
         </td>
+        <script type="text/javascript">
+            <%@include file="/scripts/draw.js"%>
+        </script>
         <!-- Форма -->
         <td><form action="" method="get" onsubmit="return checkForm(this)">
             <!-- Поле ввода координаты Х -->
@@ -169,7 +172,10 @@
                 </tr>
                 <% try {
                     DataConteiner dataConteiner = (DataConteiner) request.getServletContext().getAttribute("table");
-                if (dataConteiner.getSize()>0) {%>
+                if (dataConteiner.getSize()>0) {
+                    Data data = dataConteiner.getData(dataConteiner.getSize()-1);
+                %>
+                <script>setCords(<%=data.getX()%>,<%=data.getY()%>)</script>
                 <%for (int i=0;i<dataConteiner.getSize();i++) { %>
                     <tr>
                         <td><%=dataConteiner.getData(i).getX()%></td>
@@ -197,9 +203,7 @@
     <%@include file="/scripts/checker.js"%>
 </script>
 <script>addEventListenerToCanvas();</script>
-<script type="text/javascript">
-    <%@include file="/scripts/draw.js"%>
-</script>
+
 <script>
     draw();
 </script>

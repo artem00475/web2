@@ -166,7 +166,7 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     protected boolean forthQuarter() {
-        if (y<=0 & x>=0 & x<=r & y<=r) return true;
+        if (y<=0 & x>=0 & x<=r & y>=-r) return true;
         return false;
     }
 }

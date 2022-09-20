@@ -1,18 +1,31 @@
-var canvas=document.getElementById('canv');
-var ctx=canvas.getContext('2d');
-function draw()
-{
-    for (let x = 50;x<=350;x+=50) {
+let canvas=document.getElementById('canv');
+let ctx=canvas.getContext('2d');
+let x=-1;
+let y=-1;
+function draw() {
+    for (let x = 50; x <= 350; x += 50) {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, 400);
     }
-    for (let y = 50;y<=350;y+=50) {
+    for (let y = 50; y <= 350; y += 50) {
         ctx.moveTo(0, y);
         ctx.lineTo(400, y);
     }
+
     ctx.strokeStyle = "#333";
     ctx.stroke();
+    if (x >= 0 & y >= 0) {
+    ctx.beginPath();
+    ctx.fillStyle = "red";
+    ctx.moveTo(x, y);
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
+    ctx.fill();
+    }
+}
 
+function setCords(xCord,yCord) {
+    x=xCord*50+200;
+    y=200 - yCord*50;
 }
 
 function clearCanv() {
