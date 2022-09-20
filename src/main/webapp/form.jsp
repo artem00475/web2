@@ -175,7 +175,7 @@
                 if (dataConteiner.getSize()>0) {
                     Data data = dataConteiner.getData(dataConteiner.getSize()-1);
                 %>
-                <script>setCords(<%=data.getX()%>,<%=data.getY()%>)</script>
+                <script>setCords(<%=data.getX()%>,<%=data.getY()%>,<%=data.getHit()%>)</script>
                 <%for (int i=0;i<dataConteiner.getSize();i++) { %>
                     <tr>
                         <td><%=dataConteiner.getData(i).getX()%></td>

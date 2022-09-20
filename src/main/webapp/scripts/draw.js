@@ -2,6 +2,7 @@ let canvas=document.getElementById('canv');
 let ctx=canvas.getContext('2d');
 let x=-1;
 let y=-1;
+let hit;
 function draw() {
     for (let x = 50; x <= 350; x += 50) {
         ctx.moveTo(x, 0);
@@ -16,16 +17,18 @@ function draw() {
     ctx.stroke();
     if (x >= 0 & y >= 0) {
     ctx.beginPath();
-    ctx.fillStyle = "red";
+    ctx.fillStyle = hit;
     ctx.moveTo(x, y);
     ctx.arc(x, y, 3, 0, Math.PI * 2);
     ctx.fill();
     }
 }
 
-function setCords(xCord,yCord) {
+function setCords(xCord,yCord,hitC) {
     x=xCord*50+200;
     y=200 - yCord*50;
+    if (hitC) hit="green";
+    else hit="red";
 }
 
 function clearCanv() {
